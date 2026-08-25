@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Under The Same Sky 🌙</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #020617;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   BACKGROUND SKY
+======================================== */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(100,130,200,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(70,100,180,.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            to bottom,
+            #01030c 0%,
+            #031126 48%,
+            #061b36 100%
+        );
+
+    z-index: -5;
+}
+
+.stars {
+    position: absolute;
+    inset: -20%;
+    transition: transform 1s ease-out;
+}
+
+.star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    background: white;
+    border-radius: 50%;
+
+    opacity: .7;
+
+    animation:
+        twinkle var(--duration)
+        infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,100% {
+        opacity: .15;
+        transform: scale(.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+}
+
+/* ========================================
+   MOON
+======================================== */
+
+.moon {
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    right: 12%;
+    top: 13%;
+
+    background: #f7f3df;
+
+    box-shadow:
+        0 0 30px rgba(255,255,220,.35),
+        0 0 90px rgba(170,190,255,.15);
+
+    transition:
+        transform .8s ease,
+        box-shadow .8s ease;
+
+    cursor: pointer;
+}
+
+.moon::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background: #020617;
+
+    left: 48px;
+    top: -8px;
+
+}
+
+.moon.glow {
+
+    transform: scale(1.18);
+
+    box-shadow:
+        0 0 60px rgba(255,255,220,.55),
+        0 0 150px rgba(170,190,255,.3);
+
+}
+
+/* ========================================
+   CLOUDS
+======================================== */
+
+.cloud {
+
+    position: absolute;
+
+    width: 320px;
+    height: 70px;
+
+    background:
+        rgba(150,170,200,.045);
+
+    border-radius: 50%;
+
+    filter: blur(16px);
+
+    animation:
+        cloudMove 38s linear infinite;
+}
+
+.cloud.one {
+
+    top: 35%;
+    left: -350px;
+
+}
+
+.cloud.two {
+
+    top: 65%;
+    left: -500px;
+
+    animation-duration: 52s;
+
+}
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(140vw);
+    }
+
+}
+
+/* ========================================
+   SHOOTING STAR
+======================================== */
+
+.shooting-star {
+
+    position: absolute;
+
+    width: 130px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white
+        );
+
+    transform: rotate(-35deg);
+
+    opacity: 0;
+
+}
+
+.shooting-star.active {
+
+    animation:
+        shoot 1.5s linear;
+
+}
+
+@keyframes shoot {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate(0,0)
+            rotate(-35deg);
+
+    }
+
+    10% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-500px,500px)
+            rotate(-35deg);
+
+    }
+
+}
+
+/* ========================================
+   GENERAL SECTIONS
+======================================== */
+
+section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        70px 25px;
+
+}
+
+.hero {
+
+    text-align: center;
+
+}
+
+.small-text {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(255,255,255,.45);
+
+    margin-bottom: 25px;
+
+}
+
+h1 {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(60px,10vw,120px);
+
+    line-height: .88;
+
+    letter-spacing: -4px;
+
+}
+
+.subtitle {
+
+    margin-top: 30px;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(21px,3vw,32px);
+
+    color:
+        rgba(255,255,255,.75);
+
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button {
+
+    border:
+        1px solid rgba(255,255,255,.22);
+
+    background:
+        rgba(255,255,255,.055);
+
+    color: white;
+
+    padding:
+        14px 25px;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    margin-top: 35px;
+
+    transition: .35s;
+
+    backdrop-filter: blur(12px);
+
+}
+
+button:hover {
+
+    background:
+        rgba(255,255,255,.13);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
+
+}
+
+/* ========================================
+   PAPER RING
+======================================== */
+
+.paper-ring {
+
+    width: 65px;
+    height: 35px;
+
+    border:
+        2px solid rgba(255,255,255,.65);
+
+    border-radius: 50%;
+
+    margin:
+        25px auto 0;
+
+    transform:
+        rotate(-12deg);
+
+    opacity: .7;
+
+    position: relative;
+
+}
+
+.paper-ring::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 65px;
+    height: 35px;
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    border-radius: 50%;
+
+    left: 8px;
+    top: 5px;
+
+}
+
+/* ========================================
+   MESSAGE SECTIONS
+======================================== */
+
+.message {
+
+    max-width: 850px;
+
+    text-align: center;
+
+}
+
+.message h2 {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(48px,7vw,85px);
+
+    font-weight: 400;
+
+    margin-bottom: 30px;
+
+}
+
+.message p {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(22px,3vw,32px);
+
+    line-height: 1.55;
+
+    color:
+        rgba(255,255,255,.73);
+
+}
+
+/* ========================================
+   COUNTER
+======================================== */
+
+.counter {
+
+    margin-top: 35px;
+
+}
+
+.number {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(100px,17vw,190px);
+
+    font-weight: 300;
+
+    line-height: .8;
+
+}
+
+.label {
+
+    margin-top: 20px;
+
+    letter-spacing: 6px;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(255,255,255,.45);
+
+}
+
+/* ========================================
+   SONG BUTTON
+======================================== */
+
+.song-box {
+
+    margin-top: 45px;
+
+    padding: 20px 25px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border-radius: 20px;
+
+    display: inline-block;
+
+    backdrop-filter: blur(12px);
+
+}
+
+.song-title {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 22px;
+
+}
+
+.song-subtitle {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,.4);
+
+    margin-top: 5px;
+
+}
+
+/* ========================================
+   INTERACTIVE STARS
+======================================== */
+
+.interactive-stars {
+
+    position: relative;
+
+    width:
+        min(900px,90vw);
+
+    height: 500px;
+
+    margin:
+        10px auto 0;
+
+}
+
+.special-star {
+
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px white;
+
+    cursor: pointer;
+
+    animation:
+        specialGlow 2s infinite;
+
+    transition:
+        transform .3s;
+
+}
+
+.special-star:hover {
+
+    transform:
+        scale(1.6);
+
+}
+
+@keyframes specialGlow {
+
+    0%,100% {
+
+        box-shadow:
+            0 0 8px white;
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 30px white;
+
+    }
+
+}
+
+/* ========================================
+   STAR MESSAGE
+======================================== */
+
+.star-message {
+
+    position: absolute;
+
+    pointer-events: none;
+
+    width: 230px;
+
+    padding: 17px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(5,12,30,.9);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:
+        blur(15px);
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    transition: .4s;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 21px;
+
+    line-height: 1.3;
+
+    text-align: center;
+
+    z-index: 5;
+
+}
+
+.star-message.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+/* ========================================
+   FINAL
+======================================== */
+
+.final {
+
+    text-align: center;
+
+}
+
+.final-love {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(70px,12vw,150px);
+
+    font-weight: 300;
+
+    opacity: 0;
+
+    transform:
+        scale(.8);
+
+    transition:
+        2s ease;
+
+}
+
+.final-love.show {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+}
+
+.final p {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(21px,3vw,29px);
+
+    line-height: 1.5;
+
+    color:
+        rgba(255,255,255,.65);
+
+    margin-top: 20px;
+
+}
+
+.last-message {
+
+    margin-top: 35px;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 30px;
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        1s;
+
+}
+
+.last-message.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+/* ========================================
+   MUSIC CONTROL
+======================================== */
+
+.music {
+
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    z-index: 20;
+
+}
+
+.music button {
+
+    width: 50px;
+    height: 50px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width:600px) {
+
+    .moon {
+
+        width: 100px;
+        height: 100px;
+
+        right: 8%;
+        top: 9%;
+
+    }
+
+    .moon::after {
+
+        width: 100px;
+        height: 100px;
+
+        left: 30px;
+
+    }
+
+    .interactive-stars {
+
+        height: 430px;
+
+    }
+
+    .special-star {
+
+        width: 11px;
+        height: 11px;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ======================================
+     SKY
+====================================== -->
+
+<div class="sky">
+
+    <div class="stars" id="stars"></div>
+
+    <div class="moon" id="moon"></div>
+
+    <div class="cloud one"></div>
+
+    <div class="cloud two"></div>
+
+    <div
+        class="shooting-star"
+        id="shootingStar">
+    </div>
+
+</div>
+
+
+<!-- ======================================
+     MUSIC BUTTON
+====================================== -->
+
+<div class="music">
+
+    <button
+        id="musicBtn"
+        title="Play our song">
+
+        ♫
+
+    </button>
+
+</div>
+
+
+<!-- ======================================
+     HERO
+====================================== -->
+
+<section class="hero">
+
+    <div>
+
+        <div class="small-text">
+
+            somewhere under the same sky
+
+        </div>
+
+
+        <h1>
+
+            Hey,<br>
+
+            you.
+
+        </h1>
+
+
+        <div class="subtitle">
+
+            Look up for a second.
+
+        </div>
+
+
+        <div class="paper-ring"></div>
+
+
+        <button
+            onclick="scrollToSection('twoDays')">
+
+            ☾ Look up
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     DAYS
+====================================== -->
+
+<section id="twoDays">
+
+    <div class="message">
+
+        <div class="small-text">
+
+            okay... this is slightly embarrassing
+
+        </div>
+
+
+        <h2>
+
+            It's only been...
+
+        </h2>
+
+
+        <div class="counter">
+
+            <div
+                class="number"
+                id="daysNumber">
+
+                3
+
+            </div>
+
+
+            <div class="label">
+
+                days
+
+            </div>
+
+        </div>
+
+
+        <p style="margin-top:45px;">
+
+            And somehow...
+
+            <br><br>
+
+            I've already missed you
+            enough to make this.
+
+        </p>
+
+
+        <!-- SONG -->
+
+        <div class="song-box">
+
+            <div class="song-title">
+
+                🎵 there's a song for this
+
+            </div>
+
+            <div class="song-subtitle">
+
+                you know which one.
+
+            </div>
+
+
+            <button
+                onclick="playOurSong()">
+
+                ♫ Play our song
+
+            </button>
+
+        </div>
+
+
+        <br>
+
+
+        <button
+            onclick="scrollToSection('miss')">
+
+            I have something to say →
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     MISS
+====================================== -->
+
+<section id="miss">
+
+    <div class="message">
+
+        <div class="small-text">
+
+            apparently
+
+        </div>
+
+
+        <h2>
+
+            I miss you.
+
+        </h2>
+
+
+        <p>
+
+            Which is honestly ridiculous.
+
+            <br><br>
+
+            It's only been a few days,
+
+            but somehow the little things
+            feel a little quieter without you.
+
+            <br><br>
+
+            And I don't really know how
+            you managed to become such
+            a big part of my everyday life.
+
+        </p>
+
+
+        <button
+            onclick="scrollToSection('starsSection')">
+
+            ✨ There are more things
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     INTERACTIVE STARS
+====================================== -->
+
+<section id="starsSection">
+
+    <div class="message">
+
+        <div class="small-text">
+
+            click the stars
+
+        </div>
+
+
+        <h2>
+
+            Things I miss.
+
+        </h2>
+
+
+        <p style="font-size:20px;">
+
+            I could make a list...
+
+            <br>
+
+            but you'd probably make fun of me.
+
+        </p>
+
+
+        <div class="interactive-stars">
+
+
+            <!-- STAR 1 -->
+
+            <div
+                class="special-star"
+                style="left:20%;top:25%;"
+                data-message="I miss ranting to you.">
+
+            </div>
+
+
+            <!-- STAR 2 -->
+
+            <div
+                class="special-star"
+                style="left:65%;top:15%;"
+                data-message="I miss your cutteee smilee!!.">
+
+            </div>
+
+
+            <!-- STAR 3 -->
+
+            <div
+                class="special-star"
+                style="left:45%;top:45%;"
+                data-message="I miss having you around.">
+
+            </div>
+
+
+            <!-- STAR 4 -->
+
+            <div
+                class="special-star"
+                style="left:75%;top:60%;"
+                data-message="I miss our hugs!!.">
+
+            </div>
+
+
+            <!-- STAR 5 -->
+
+            <div
+                class="special-star"
+                style="left:25%;top:70%;"
+                data-message="I miss being able to bother you.">
+
+            </div>
+
+
+            <!-- STAR 6 -->
+
+            <div
+                class="special-star"
+                style="left:52%;top:80%;"
+                data-message="Okay... I just miss YOU.">
+
+            </div>
+
+
+            <!-- STAR 7 -->
+
+            <div
+                class="special-star"
+                style="left:32%;top:30%;"
+                data-message="I just miss seeing the sky with uuuu!!.">
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            onclick="scrollToSection('final')">
+
+            🌙 One last thing
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     FINAL
+====================================== -->
+
+<section id="final">
+
+    <div class="final">
+
+        <div class="small-text">
+
+            okay, fine
+
+        </div>
+
+
+        <div
+            class="final-love"
+            id="finalLove">
+
+            I love you.
+
+        </div>
+
+
+        <p>
+
+            in that quiet,
+
+            <br>
+
+            comfortable,
+
+            <br>
+
+            impossible-to-explain way.
+
+        </p>
+
+
+        <div class="paper-ring"></div>
+
+
+        <button
+            onclick="finalMessage()">
+
+            ✨ One more thing
+
+        </button>
+
+
+        <div
+            class="last-message"
+            id="lastMessage">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* ========================================
+   SETTINGS
+======================================== */
+
+/*
+   Change this to 2 if needed.
+*/
+
+const DAYS_APART = 3;
+
+
+/*
+   Put your Spotify/song link here.
+
+   IMPORTANT:
+   Do not upload the copyrighted song itself
+   to your website.
+
+   This button opens the song externally.
+*/
+
+const OUR_SONG_URL =
+    "https://open.spotify.com/track/4y5bvROuBDPr5fuwXbIBZR?si=f9556bdad84e481c";
+
+
+/* ========================================
+   DAYS
+======================================== */
+
+document.getElementById("daysNumber")
+    .innerText = DAYS_APART;
+
+
+/* ========================================
+   GENERATE STARS
+======================================== */
+
+const starContainer =
+    document.getElementById("stars");
+
+
+for(let i = 0; i < 350; i++){
+
+    const star =
+        document.createElement("div");
+
+
+    star.className =
+        "star";
+
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+
+    const size =
+        Math.random() * 2 + 1;
+
+
+    star.style.width =
+        size + "px";
+
+
+    star.style.height =
+        size + "px";
+
+
+    star.style.setProperty(
+        "--duration",
+        (2 + Math.random() * 5) + "s"
+    );
+
+
+    star.style.animationDelay =
+        Math.random() * 5 + "s";
+
+
+    starContainer.appendChild(star);
+
+}
+
+
+/* ========================================
+   MOUSE PARALLAX
+======================================== */
+
+document.addEventListener(
+    "mousemove",
+    (e) => {
+
+        const x =
+            (e.clientX /
+            window.innerWidth - .5) * 20;
+
+
+        const y =
+            (e.clientY /
+            window.innerHeight - .5) * 20;
+
+
+        starContainer.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+    }
+);
+
+
+/* ========================================
+   MOON
+======================================== */
+
+const moon =
+    document.getElementById("moon");
+
+
+moon.addEventListener(
+    "click",
+    () => {
+
+        moon.classList.add("glow");
+
+
+        setTimeout(
+            () => {
+
+                moon.classList.remove("glow");
+
+            },
+            900
+        );
+
+    }
+);
+
+
+/* ========================================
+   SHOOTING STARS
+======================================== */
+
+function shootingStar(){
+
+    const star =
+        document.getElementById(
+            "shootingStar"
+        );
+
+
+    star.style.left =
+        (70 + Math.random() * 20) + "%";
+
+
+    star.style.top =
+        (5 + Math.random() * 30) + "%";
+
+
+    star.classList.remove("active");
+
+
+    void star.offsetWidth;
+
+
+    star.classList.add("active");
+
+}
+
+
+setInterval(
+    shootingStar,
+    6500
+);
+
+
+/* ========================================
+   PLAY OUR SONG
+======================================== */
+
+function playOurSong(){
+
+    if(
+        OUR_SONG_URL ===
+        "YOUR_SONG_LINK_HERE"
+    ){
+
+        alert(
+            "Add your song link in the OUR_SONG_URL setting first 💙"
+        );
+
+        return;
+
+    }
+
+
+    window.open(
+        OUR_SONG_URL,
+        "_blank"
+    );
+
+}
+
+
+/* ========================================
+   SPECIAL STARS
+======================================== */
+
+const specialStars =
+    document.querySelectorAll(
+        ".special-star"
+    );
+
+
+specialStars.forEach(
+    star => {
+
+        star.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".star-message"
+                    )
+                    .forEach(
+                        x => x.remove()
+                    );
+
+
+                const message =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                message.className =
+                    "star-message show";
+
+
+                message.innerText =
+                    star.dataset.message;
+
+
+                message.style.left =
+                    `calc(${star.style.left} - 90px)`;
+
+
+                message.style.top =
+                    `calc(${star.style.top} + 25px)`;
+
+
+                star.parentElement
+                    .appendChild(message);
+
+
+                setTimeout(
+                    () => {
+
+                        message.remove();
+
+                    },
+                    3500
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* ========================================
+   SCROLL
+======================================== */
+
+function scrollToSection(id){
+
+    document
+        .getElementById(id)
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ========================================
+   FINAL REVEAL
+======================================== */
+
+const finalSection =
+    document.getElementById("final");
+
+
+let revealed = false;
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting &&
+                        !revealed
+                    ){
+
+                        revealed = true;
+
+
+                        setTimeout(
+                            () => {
+
+                                document
+                                    .getElementById(
+                                        "finalLove"
+                                    )
+                                    .classList
+                                    .add("show");
+
+                            },
+                            700
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .5
+        }
+    );
+
+
+observer.observe(finalSection);
+
+
+/* ========================================
+   FINAL MESSAGE
+======================================== */
+
+function finalMessage(){
+
+    const msg =
+        document.getElementById(
+            "lastMessage"
+        );
+
+
+    msg.innerHTML =
+
+        "Will come back soon. 🌙" +
+
+        "<br><br>" +
+
+        "<span style='font-size:20px;color:rgba(255,255,255,.45);'>" +
+
+        "I have more things to tell you anyway." +
+
+        "</span>";
+
+
+    msg.classList.add("show");
+
+}
+
+
+/* ========================================
+   MUSIC BUTTON
+======================================== */
+
+const musicBtn =
+    document.getElementById(
+        "musicBtn"
+    );
+
+
+musicBtn.addEventListener(
+    "click",
+    playOurSong
+);
+
+
+/* ========================================
+   RANDOM SHOOTING STAR AT START
+======================================== */
+
+setTimeout(
+    shootingStar,
+    2500
+);
+
+</script>
+
+</body>
+</html>
